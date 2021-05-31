@@ -12,13 +12,14 @@ import CreateCard from './CreateCard'
 const HomePage = () => {
 
     const { path, url } = useRouteMatch()
-
+    console.log(path)
+    console.log('url', url)
     return (
         <>
             <Navigation />
             <Header />
             <Switch>
-                <Route path={`${path}/create-card`}>
+                <Route path={`/create-card`}>
                     <CreateCard />
                 </Route>
             </Switch>

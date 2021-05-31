@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import Search from '../images/searching.svg'
 
 const Header = () => {
     return (
         <Container>
             <StyledInput type="text" placeholder="search" />
-            <StyledBtn type="submit">search</StyledBtn>
-            <Logo>Logo</Logo>
+            <StyledBtn type="submit">
+                <Icon src={Search} />
+            </StyledBtn>
         </Container>
     )
 }
@@ -15,29 +17,28 @@ export default Header
 
 const Container = styled.div`
     display: inline-block;
+    border-bottom: 1px solid #4C647F;
+    margin: 30px;  
 `
 
 const StyledInput = styled.input`
     border: none;
-    border-bottom: 1px solid gray;  
-    margin-left: 3rem;  
+    /* border-bottom: 1px solid gray;   */
+    margin-left: 5px;  
 `
 
 const StyledBtn = styled.button`
-    text-transform: uppercase;
-    border-radius: 10px;
+    border-radius: 5px;
     font-size: 12px;
-    font-weight: bold;
-    color: #ffffff;
-    padding: 10px 15px;
-    background-color: gray;
+    padding: 8px 10px;
+    background-color: #4C647F;
     border: none;   
-    margin-left: 1rem;
+    margin: 0 0 5px 5px;
     &:hover {
         opacity: 0.8;
     } 
 `
 
-const Logo = styled.p`
-    display: inline-block;
+const Icon = styled.img`
+    height: 1rem;
 `
