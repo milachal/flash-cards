@@ -1,11 +1,23 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import CardContext from '../contexts/CardContext'
 
 const CreateCard = () => {
 
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
+    const history = useHistory()
+    
+    const submitHandler = () => {
+        const flashCardsArr = JSON.parse(localStorage.getItem('flashCards')) || []
+        const flashCardContent = { frontText, backText }
+
+        flashCardsArr.push(flashCardContent)
+        localStorage.setItem('flashCards', JSON.stringify(flashCardsArr))
+        
+        return history.push('/my-flash-cards')
+    }
 
     return (
         <CardContext.Provider value={{frontText, setFrontText, backText, setBackText}}>
@@ -19,7 +31,7 @@ const CreateCard = () => {
                 <TextField type="text" onChange={e => setBackText(e.target.value)} value={backText} />
             </Container>
             <br/>   
-            <Button type='submit'>submit</Button>
+            <Button type='submit' onClick={submitHandler}>submit</Button>
         </CardContext.Provider>
     )
 }

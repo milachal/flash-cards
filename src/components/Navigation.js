@@ -1,15 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { 
-        NavLink,
-        useRouteMatch
-} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const Navigation = () => {
 
-    const { url } = useRouteMatch()
-
-    console.log(url)
     return (
         <Container>
             <StyledLink to={`/create-card`}>Create card</StyledLink>
