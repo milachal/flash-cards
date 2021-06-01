@@ -7,7 +7,7 @@ const Navigation = () => {
     return (
         <Container>
             <StyledLink to={`/create-card`}>Create card</StyledLink>
-            <StyledLink to=''>All cards</StyledLink>
+            <StyledLink to={`/my-flash-cards`}>All cards</StyledLink>
             <StyledLink to=''>My profile</StyledLink>
         </Container>
     )

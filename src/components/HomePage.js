@@ -6,6 +6,7 @@ import {
 import Navigation from './Navigation'
 import Header from './Header'
 import CreateCard from './CreateCard'
+import FlashCards from './FlashCards'
 
 const HomePage = () => {
 
@@ -16,6 +17,9 @@ const HomePage = () => {
             <Switch>
                 <Route path={`/create-card`}>
                     <CreateCard />
+                </Route>
+                <Route path={'/my-flash-cards'}>
+                    <FlashCards />
                 </Route>
             </Switch>
         </>
