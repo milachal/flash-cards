@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import uniqid from 'uniqid'
 
 const CreateCard = () => {
 
@@ -10,7 +11,8 @@ const CreateCard = () => {
 
     const submitHandler = () => {
         const flashCardsArr = JSON.parse(localStorage.getItem('flashCards')) || []
-        const flashCardContent = { frontText, backText }
+        const _id = uniqid()
+        const flashCardContent = { frontText, backText, _id}
 
         flashCardsArr.push(flashCardContent)
         localStorage.setItem('flashCards', JSON.stringify(flashCardsArr))
@@ -57,8 +59,8 @@ const Text = styled.p`
 const TextField = styled.textarea`
     border-color: #4C647F;
     border-radius: 5px;
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
     resize: none;
     vertical-align: middle;
     text-align: center;
