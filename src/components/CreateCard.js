@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import uniqid from 'uniqid'
+import FlashCardsContext from '../contexts/FlashCardsContext'
 
 const CreateCard = () => {
 
     const [frontText, setFrontText] = useState('')
     const [backText, setBackText] = useState('')
     const history = useHistory()
+    const { flashCards, setFlashCards } = useContext(FlashCardsContext)
 
     const submitHandler = () => {
-        const flashCardsArr = JSON.parse(localStorage.getItem('flashCards')) || []
         const _id = uniqid()
         const flashCardContent = { frontText, backText, _id}
 
-        flashCardsArr.push(flashCardContent)
-        localStorage.setItem('flashCards', JSON.stringify(flashCardsArr))
-        
-        return history.push('/my-flash-cards')
+        flashCards.push(flashCardContent)
+        localStorage.setItem('flashCards', JSON.stringify(flashCards))
+        setFlashCards(flashCards)
+        history.push('/my-flash-cards')
     }
 
     return (

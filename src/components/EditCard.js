@@ -1,34 +1,29 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 import FlashCardsContext from '../contexts/FlashCardsContext'
 
-const EditCard = ({ editedCard }) => {
+const EditCard = ({ editedCard, setEditedCard }) => {
 
-    const [editedFrontText, setEditedFrontText] = useState(editedCard[0].frontText || [])
-    const [editedBackText, setEditedBackText] = useState(editedCard[0].backText || [])
+    const [editedFrontText, setEditedFrontText] = useState(editedCard.frontText || '')
+    const [editedBackText, setEditedBackText] = useState(editedCard.backText || '')
 
     const { flashCards, setFlashCards } = useContext(FlashCardsContext)
-
-    const history = useHistory()
     
     const submitEditedCardHandler = () => {
         const indexOfEditedCard = flashCards.findIndex(card => {
-            return card._id === editedCard[0]._id
+            return card._id === editedCard._id
         })
-
         const newFlashCards = flashCards
         newFlashCards[indexOfEditedCard] = {
+            ...newFlashCards[indexOfEditedCard],
             frontText: editedFrontText,
             backText: editedBackText
         }
-        
+
         setFlashCards(newFlashCards)
         localStorage.setItem('flashCards', JSON.stringify(newFlashCards))
-        return history.push('/my-flash-cards')
+        setEditedCard({})
     }
-
-    console.log(flashCards)
 
     return (
         <div>

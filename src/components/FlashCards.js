@@ -15,47 +15,46 @@ const FlashCards = () => {
         const cardToEdit = flashCards.filter(card => {
             return card._id === id
         })
-        return setEditedCard(cardToEdit)
+        if (cardToEdit.length > 0) {
+            setEditedCard(cardToEdit[0])
+        }
     }
 
     const deleteCardHandler = (id) => {
-       const  newCardsArr = flashCards.filter(card => {
+       const newCardsArr = flashCards.filter(card => {
             return card._id !== id
         })
         setFlashCards(newCardsArr)
         localStorage.setItem('flashCards', JSON.stringify(newCardsArr))
-        return history.push('/my-flash-cards')
     }
 
-    if (editedCard.length > 0) {
+    if (!flashCards) {
         return (
-            <EditCard editedCard={editedCard} />
+            <Text>No cards yet.</Text>
         )
     }
 
     return (
         <>
-            {flashCards ? (
-                <>
-                    {flashCards.map((card, index) => {
-                        return (
-                            <div key={index}>
-                                <CardOptions 
-                                    id={card._id}
-                                    editCardHandler={editCardHandler} 
-                                    deleteCardHandler={deleteCardHandler}
-                                />
-                                
-                                <Card readOnly value={card.frontText} />
-                                <Card readOnly value={card.backText} />
-                            </div>
-                        )
-                    })}
-                </>
-            )
-            : (
-                <Text>No cards yet.</Text>
-            )}
+            {flashCards.map((card) => {
+                if (editedCard && card._id === editedCard._id) {
+                    return (
+                        <EditCard key={card._id} editedCard={editedCard} setEditedCard={setEditedCard} />
+                    )
+                }
+                return (
+                    <div key={card._id}>
+                        <CardOptions 
+                            id={card._id}
+                            editCardHandler={editCardHandler} 
+                            deleteCardHandler={deleteCardHandler}
+                        />
+                        
+                        <Card readOnly value={card.frontText} />
+                        <Card readOnly value={card.backText} />
+                    </div>
+                )
+            })}
         </>
     )
 }

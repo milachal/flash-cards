@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-    Route,
-    Switch
-} from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Navigation from './Navigation'
 import Header from './Header'
 import CreateCard from './CreateCard'
@@ -14,14 +11,12 @@ const HomePage = () => {
         <>
             <Navigation />
             <Header />
-            <Switch>
-                <Route path={`/create-card`}>
-                    <CreateCard />
-                </Route>
-                <Route path={'/my-flash-cards'}>
-                    <FlashCards />
-                </Route>
-            </Switch>
+            <Route path={`/create-card`}>
+                <CreateCard />
+            </Route>
+            <Route path={'/my-flash-cards'}>
+                <FlashCards />
+            </Route>
         </>
     )
 }
