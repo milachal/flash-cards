@@ -20,7 +20,7 @@ const Container = styled.div`
     width: 100%;
     padding: 15px; 
     line-height: 1.6;
-    background-color: #B3D6FF;
+    background-color: #4C647F;
     justify-content: space-evenly;
 `
 
