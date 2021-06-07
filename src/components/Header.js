@@ -3,41 +3,37 @@ import styled from 'styled-components'
 import Search from '../images/searching.svg'
 import FlashCardsContext from '../contexts/FlashCardsContext'
 
-const Header = () => {
+const Header = (props) => {
 
     const [keyword, setKeyword] = useState('')
-    const [searchResults, setSearchResults] = useState()
     const { flashCards } = useContext(FlashCardsContext)
 
     const searchBarHandler = (e) => {
-        setKeyword(e.target.value)
+        const search = e.target.value.toLowerCase()
+        setKeyword(search)
         
-        const findResults = keyword => {
+        const findResults = () => {
 
-            const result = flashCards.filter(card => {
-                return card.frontText.includes(keyword) || card.backText.includes(keyword)
+            const searchResult = flashCards.filter(card => {
+                return card.frontText.toLowerCase().includes(search) || card.backText.toLowerCase().includes(search)
             })
 
-            return setSearchResults(result)
+            return props.setFilteredCards(searchResult)
         }
 
-        return findResults(keyword)
+        return findResults()
     }
-
-    console.log(keyword)
-    console.log(searchResults)
 
     return (
         <Container>
             <StyledInput 
                 type="text" 
-                placeholder="search" 
+                placeholder="Search for cards" 
                 value={keyword} 
                 onChange={searchBarHandler} 
             />
-            <StyledBtn type="submit">
-                <Icon src={Search} />
-            </StyledBtn>
+            <Icon src={Search} />
+            
         </Container>
     )
 }
@@ -52,23 +48,13 @@ const Container = styled.div`
 
 const StyledInput = styled.input`
     border: none;
-    /* border-bottom: 1px solid gray;   */
+    padding: 10px;
     margin-left: 5px;  
     outline: none;
 `
 
-const StyledBtn = styled.button`
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 8px 10px;
-    background-color: #4C647F;
-    border: none;   
-    margin: 0 0 5px 5px;
-    &:hover {
-        opacity: 0.8;
-    } 
-`
-
 const Icon = styled.img`
     height: 1rem;
+    color: black;
 `
+

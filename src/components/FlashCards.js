@@ -1,15 +1,13 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 import CardOptions from './CardOptions'
 import FlashCardsContext from '../contexts/FlashCardsContext'
 import EditCard from './EditCard'
 
-const FlashCards = () => {
+const FlashCards = (props) => {
 
     const { flashCards, setFlashCards } = useContext(FlashCardsContext)
     const [editedCard, setEditedCard] = useState({})
-    const history = useHistory()
 
     const editCardHandler = (id) => {
         const cardToEdit = flashCards.filter(card => {
@@ -36,7 +34,7 @@ const FlashCards = () => {
 
     return (
         <>
-            {flashCards.map((card) => {
+            {props.flashCards.map((card) => {
                 if (editedCard && card._id === editedCard._id) {
                     return (
                         <EditCard key={card._id} editedCard={editedCard} setEditedCard={setEditedCard} />
