@@ -15,8 +15,6 @@ const HomePage = () => {
         setSearchResults(childData)
     }
 
-    console.log(searchResults)
-
     return (
         <>
             <Navigation />

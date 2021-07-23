@@ -5,11 +5,10 @@ import FlashCardsContext from './contexts/FlashCardsContext'
 const App = () => {
 
   const [flashCards, setFlashCards] = useState([])
-  console.log(flashCards)
   
   useEffect(() => {
     const localStorageFlashCards = JSON.parse(localStorage.getItem('flashCards'))
-    setFlashCards(localStorageFlashCards)
+    setFlashCards(localStorageFlashCards || [])
   }, [])
 
   return (

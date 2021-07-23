@@ -6,11 +6,11 @@ import FlashCard from './FlashCard'
 
 const FlashCards = (props) => {
 
-    const { flashCards, setFlashCards } = useContext(FlashCardsContext)
+    const { setFlashCards } = useContext(FlashCardsContext)
     const [editedCard, setEditedCard] = useState({})
 
     const editCardHandler = (id) => {
-        const cardToEdit = flashCards.filter(card => {
+        const cardToEdit = props.flashCards.filter(card => {
             return card._id === id
         })
         if (cardToEdit.length > 0) {
@@ -19,14 +19,15 @@ const FlashCards = (props) => {
     }
 
     const deleteCardHandler = (id) => {
-       const newCardsArr = flashCards.filter(card => {
+       const newCardsArr = props.flashCards.filter(card => {
             return card._id !== id
         })
+        
         setFlashCards(newCardsArr)
         localStorage.setItem('flashCards', JSON.stringify(newCardsArr))
     }
 
-    if (!flashCards) {
+    if (props.flashCards?.length === 0) {
         return (
             <Text>No cards yet.</Text>
         )
